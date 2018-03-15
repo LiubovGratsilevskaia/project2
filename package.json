@@ -2,8 +2,9 @@
   "name": "M7",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://LiubovGratsilevskaia.github.io/project2",
+  "homepage": "https://Liubovgratsilevskaia.github.io/project2",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"
