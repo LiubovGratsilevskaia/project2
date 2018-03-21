@@ -5,7 +5,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            todoList: ['Temp', 'New'],
+            todoList: [{ id: 1, name: 'Temp'},{ id: 2, name: 'New'} ],
             todoInput:'',
             todoInputValid: false,
         };
@@ -19,21 +19,27 @@ class App extends Component {
            todoInputValid
        })
         }
+
+        uuidv4(){
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => (c^crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
+        }
     addTodo() {
         console.log('click');
 
         const todoList = this.state.todoList;
-        todoList.push(this.state.todoInput);
+        todoList.push( {
+            id: this.uuidv4(),
+            name: this.state.todoInput
+        });
 
         this.setState({
             todoList,
         });
         }
-        DeleteItem(todo){
-        console.log(todo);
-        const todoList = this.state.todoList.filter(el => el !== todo);
+        DeleteItem(id){
+        const todoList = this.state.todoList.filter(el => el.id !== id);
 
-        this.setState({ todoList }, () => { console.log(this.state) });
+        this.setState({ todoList });
 
         }
 
@@ -47,10 +53,10 @@ class App extends Component {
               <div className="col-6 col-sm-4 col-md-6 col-lg-4 border">
                   <ul>
                       {this.state.todoList.map(el =>
-                          <li key={el}>{el}
+                          <li key={el.id}>{el.name}
                             <span
                                 className="btn btn-danger btn-sm"
-                                onClick={() => this.DeleteItem(el)}
+                                onClick={() => this.DeleteItem(el.id)}
                             >Delete
                             </span>
                           </li>)}
